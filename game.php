@@ -56,21 +56,25 @@ $hasWeapon = !empty($weaponModel) && file_exists(__DIR__ . '/' . $weaponModelPat
             <a-light type="ambient" intensity="1.2"></a-light>
             <a-light type="directional" position="0 10 5" intensity="1.5"></a-light>
 
-            <!-- 摄像机 (相机跟随) -->
+            <!-- 摄像机：将枪械绑定在镜头前，跟随手机视角移动 -->
             <a-camera position="0 0 0" look-controls="enabled: false">
-                <!-- 枪械模型（绑定在相机构架上，随视角移动） -->
                 <?php if ($hasWeapon): ?>
+                    <!-- 如果后台配置了枪械 GLB 模型 -->
                     <a-gltf-model id="player-weapon" 
-                                  src="#weapon-glb" 
-                                  position="0.2 -0.25 -0.5" 
-                                  rotation="0 180 0" 
-                                  scale="0.1 0.1 0.1">
+                                src="#weapon-glb" 
+                                position="0.15 -0.2 -0.4" 
+                                rotation="0 180 0" 
+                                scale="0.05 0.05 0.05">
                     </a-gltf-model>
                 <?php else: ?>
-                    <!-- 如果没有 GLB 枪械模型，渲染一个备用 3D 枪管 -->
-                    <a-entity id="player-weapon-fallback" position="0.2 -0.2 -0.4" rotation="0 0 0">
-                        <a-cylinder position="0 0 -0.1" radius="0.02" height="0.3" rotation="90 0 0" material="color: #222; metalness: 0.8;"></a-cylinder>
-                        <a-box position="0 -0.05 0" depth="0.1" height="0.15" width="0.04" material="color: #111;"></a-box>
+                    <!-- 如果没有上传/选择 GLB 枪械模型，使用纯代码绘制一把科技感枪械 -->
+                    <a-entity id="player-weapon-fallback" position="0.18 -0.18 -0.35" rotation="5 -10 0">
+                        <!-- 枪管 -->
+                        <a-cylinder position="0 0 -0.1" radius="0.018" height="0.3" rotation="90 0 0" material="color: #222; metalness: 0.9; roughness: 0.2;"></a-cylinder>
+                        <!-- 枪身/机匣 -->
+                        <a-box position="0 -0.02 0.02" depth="0.15" height="0.06" width="0.035" material="color: #00f0ff; metalness: 0.5; emissive: #00f0ff; emissiveIntensity: 0.3;"></a-box>
+                        <!-- 握把 -->
+                        <a-box position="0 -0.07 0.05" depth="0.04" height="0.08" width="0.03" rotation="-15 0 0" material="color: #111;"></a-box>
                     </a-entity>
                 <?php endif; ?>
             </a-camera>
