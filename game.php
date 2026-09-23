@@ -18,7 +18,7 @@ declare(strict_types=1);
     <!-- AR 识别渲染容器 -->
     <div id="ar-container">
         <!-- 找到 a-scene 标签，替换成这行 -->
-            <a-scene mindar-image="imageTargetSrc: ./targets.mind?v=<?php echo time(); ?>; autoStart: true;" 
+            <a-scene mindar-image="imageTargetSrc: ./assets/targets/targets.mind?v=<?php echo time(); ?>; autoStart: true;" 
                     embedded 
                     color-space="sRGB" 
                     renderer="colorManagement: true, physicallyCorrectLights" 
