@@ -1,0 +1,425 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+    --bg-color: #0b0d14;
+    --card-bg: rgba(18, 22, 36, 0.75);
+    --primary: #00f0ff;
+    --primary-glow: rgba(0, 240, 255, 0.4);
+    --accent: #ff0055;
+    --accent-glow: rgba(255, 0, 85, 0.5);
+    --warning: #ffb703;
+    --text-color: #f0f4f8;
+    --text-dim: #8a99ad;
+    --border-color: rgba(0, 240, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* ==========================================================================
+   1. 桌面 Web / 管理后台界面样式 (index.php, models.php)
+   ========================================================================== */
+
+.theme-dark {
+    background: radial-gradient(circle at 50% 20%, #151928 0%, #080a0f 100%);
+    overflow-y: auto;
+    position: relative;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2.5rem;
+    background: rgba(11, 13, 20, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.navbar nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 1.8rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+}
+
+.navbar nav a:hover, .navbar nav a.active {
+    color: var(--primary);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+.hero-container {
+    max-width: 900px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* 玻璃拟态卡片 */
+.qr-card, .target-preview-box, fieldset, form {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 科技感卡片角边装饰 */
+.qr-card::before, .target-preview-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 12px; height: 12px;
+    border-top: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
+}
+
+.qr-card h3, .target-preview-box h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+}
+
+.qr-wrapper img {
+    border-radius: 12px;
+    border: 2px solid var(--primary);
+    padding: 6px;
+    background: #fff;
+    box-shadow: 0 0 20px var(--primary-glow);
+    transition: transform 0.3s ease;
+}
+
+.qr-wrapper img:hover {
+    transform: scale(1.03);
+}
+
+.url-text {
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary);
+    border: 1px dashed var(--border-color);
+}
+
+.target-preview-box img {
+    max-width: 260px;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    margin-top: 1rem;
+}
+
+/* 按钮全局样式 */
+.btn {
+    display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #0088ff 100%);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 25px var(--primary-glow);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 240, 255, 0.15);
+    border-color: var(--primary);
+}
+
+
+/* ==========================================================================
+   2. 手机 WebAR 游戏运行全屏 HUD 样式 (game.php)
+   ========================================================================== */
+
+#ar-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#ar-container video {
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 游戏 HUD 主界面 */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(env(safe-area-inset-top) + 10px) calc(env(safe-area-inset-right) + 15px) calc(env(safe-area-inset-bottom) + 15px) calc(env(safe-area-inset-left) + 15px);
+}
+
+/* 顶部状态信息卡片 */
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(11, 13, 20, 0.65);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.hud-stats-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hud-stats-label {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.hud-stats-val {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+.hud-stats-val.hp {
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* 状态提示标签 */
+#status-text {
+    align-self: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    color: var(--primary);
+    text-shadow: 0 0 6px var(--primary-glow);
+    animation: statusPulse 2s infinite alternate;
+}
+
+@keyframes statusPulse {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* 拟真准星 Design */
+#crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: transform 0.05s ease;
+}
+
+#crosshair::before, #crosshair::after {
+    content: '';
+    position: absolute;
+    background: var(--primary);
+    box-shadow: 0 0 6px var(--primary);
+}
+
+/* 十字线构造 */
+#crosshair::before { top: 13px; left: 0; width: 28px; height: 2px; }
+#crosshair::after { top: 0; left: 13px; width: 2px; height: 28px; }
+
+/* 击中敌人反馈 */
+#crosshair.hit::before, #crosshair.hit::after {
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+}
+
+#crosshair.hit {
+    transform: translate(-50%, -50%) scale(1.4);
+}
+
+/* 手机底部按键控制区 */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: auto;
+    width: 100%;
+}
+
+.ammo-box {
+    font-family: 'Orbitron', sans-serif;
+    background: rgba(11, 13, 20, 0.65);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.ammo-val {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--warning);
+}
+
+/* 触控圆按钮 */
+.action-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    touch-action: manipulation;
+    outline: none;
+    backdrop-filter: blur(8px);
+    transition: transform 0.1s ease, filter 0.1s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+#btn-reload {
+    width: 68px;
+    height: 68px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--glass-border);
+    font-size: 0.8rem;
+}
+
+#btn-reload:active {
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+#btn-fire {
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, var(--accent) 0%, #b3003b 100%);
+    border: 2px solid #ff6699;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+#btn-fire:active {
+    transform: scale(0.92);
+    filter: brightness(1.3);
+}
+
+/* 结算弹窗 (Game Over) */
+.modal {
+    backdrop-filter: blur(15px);
+    background: rgba(8, 10, 15, 0.88) !important;
+}
+
+.modal-card {
+    background: var(--card-bg);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 0 30px var(--accent-glow);
+    max-width: 85vw;
+}
+
+.modal-card h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--accent);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.hidden {
+    display: none !important;
+}
