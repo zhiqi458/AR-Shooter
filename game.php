@@ -35,7 +35,7 @@ $hasWeapon = !empty($weaponModel) && file_exists(__DIR__ . '/' . $weaponModelPat
     <!-- AR 画面容器 -->
     <div id="ar-container">
         <!-- 在 a-scene 中加上 colorManagement 与渲染设置 -->
-        <a-scene mindar-image="imageTargetSrc: ./targets.mind?v=<?php echo time(); ?>; autoStart: true;" 
+        <a-scene mindar-image="imageTargetSrc: ./assets/targets/targets.mind?v=<?php echo time(); ?>; autoStart: true;" 
                 embedded 
                 color-space="sRGB" 
                 renderer="colorManagement: true, physicallyCorrectLights: true, sortObjects: true" 
