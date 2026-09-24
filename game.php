@@ -110,7 +110,7 @@ $hasWeapon = !empty($weaponModel) && file_exists(__DIR__ . '/' . $weaponModelPat
             </div>
             <!-- 手持枪械图层（固定在右下角） -->
             <div id="weapon-overlay">
-                <img src="assets/images/gun.png" alt="Weapon" id="weapon-img">
+                <img src="assets/models/weapons" alt="Weapon" id="weapon-img">
             </div>
         </div>
 
