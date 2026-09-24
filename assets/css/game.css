@@ -423,3 +423,26 @@ h1 {
 .hidden {
     display: none !important;
 }
+
+/* 将枪械固定在手机屏幕右下角 */
+#weapon-overlay {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 280px;
+    pointer-events: none; /* 让点击穿透，不影响点击射击按钮 */
+    z-index: 90; /* 确保层级高于 3D 场景，永远在最前面 */
+}
+
+#weapon-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform-origin: bottom right;
+    transition: transform 0.05s ease;
+}
+
+/* 点击 FIRE 按钮时的枪械后坐力效果 */
+.weapon-recoil {
+    transform: translate(-10px, 15px) rotate(-5deg);
+}

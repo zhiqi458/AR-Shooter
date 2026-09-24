@@ -57,32 +57,21 @@ $hasWeapon = !empty($weaponModel) && file_exists(__DIR__ . '/' . $weaponModelPat
             <a-light type="ambient" intensity="1.5"></a-light>
             <a-light type="directional" position="0 10 5" intensity="2"></a-light>
 
-            <!-- 相机 + 持枪节点 (添加 render-order 强行置顶) -->
-            <a-camera position="0 0 0" look-controls="enabled: false">
-                
-                <?php if ($hasWeapon): ?>
-                    <!-- GLB 枪械模型 -->
-                    <a-gltf-model id="player-weapon" 
-                                src="#weapon-glb" 
-                                position="0.2 -0.25 -0.5" 
-                                rotation="0 180 0" 
-                                scale="0.08 0.08 0.08">
-                    </a-gltf-model>
-                <?php else: ?>
-                    <!-- 备用 3D 枪械（使用了 material="depthTest: false" 确保永远置顶不会消失） -->
-                    <a-entity id="player-weapon-fallback" position="0.18 -0.18 -0.35" rotation="5 -10 0">
-                        <!-- 枪管 -->
-                        <a-cylinder position="0 0 -0.1" radius="0.018" height="0.3" rotation="90 0 0" 
-                                    material="color: #222; metalness: 0.9; roughness: 0.2; depthTest: false;"></a-cylinder>
-                        <!-- 枪身 -->
-                        <a-box position="0 -0.02 0.02" depth="0.15" height="0.06" width="0.035" 
-                            material="color: #00f0ff; metalness: 0.5; emissive: #00f0ff; emissiveIntensity: 0.5; depthTest: false;"></a-box>
-                        <!-- 握把 -->
-                        <a-box position="0 -0.07 0.05" depth="0.04" height="0.08" width="0.03" rotation="-15 0 0" 
-                            material="color: #111; depthTest: false;"></a-box>
-                    </a-entity>
-                <?php endif; ?>
-
+            <a-camera position="0 0 0" look-controls="enabled: false" wasd-controls="enabled: false">
+                <!-- 枪械模型挂载在相机的子节点，并加上 position 和 rotate 锁定 -->
+                <a-entity id="gun-wrapper" position="0.18 -0.2 -0.3" rotation="0 180 0">
+                    <?php if ($hasWeapon): ?>
+                        <a-gltf-model id="player-weapon" 
+                                    src="#weapon-glb" 
+                                    scale="0.08 0.08 0.08"
+                                    material="depthTest: false;"
+                                    animation-mixer>
+                        </a-gltf-model>
+                    <?php else: ?>
+                        <!-- 备用枪管 -->
+                        <a-cylinder position="0 0 0" radius="0.02" height="0.3" rotation="90 0 0" material="color: #222; depthTest: false;"></a-cylinder>
+                    <?php endif; ?>
+                </a-entity>
             </a-camera>
 
             <!-- AR 识别目标锚点 -->
@@ -119,6 +108,10 @@ $hasWeapon = !empty($weaponModel) && file_exists(__DIR__ . '/' . $weaponModelPat
                 <span class="hud-stats-label">HEALTH</span>
                 <span id="hp-val" class="hud-stats-val hp">5</span>
             </div>
+            <!-- 手持枪械图层（固定在右下角） -->
+            <div id="weapon-overlay">
+                <img src="assets/images/gun.png" alt="Weapon" id="weapon-img">
+            </div>
         </div>
 
         <div id="status-text">SEARCHING TARGET...</div>
@@ -137,6 +130,7 @@ $hasWeapon = !empty($weaponModel) && file_exists(__DIR__ . '/' . $weaponModelPat
         const targetEntity = document.querySelector('#example-target');
         const statusText = document.querySelector('#status-text');
 
+        // 识别目标状态监听
         targetEntity.addEventListener("targetFound", () => {
             statusText.innerText = "TARGET LOCKED!";
             statusText.style.color = "#00f0ff";
@@ -146,6 +140,26 @@ $hasWeapon = !empty($weaponModel) && file_exists(__DIR__ . '/' . $weaponModelPat
             statusText.innerText = "SEARCHING TARGET...";
             statusText.style.color = "var(--primary)";
         });
+
+        // ==========================================
+        // 【新增】点击开火按钮触发枪械后坐力动画
+        // ==========================================
+        const fireBtn = document.getElementById('btn-fire');
+        const weaponImg = document.getElementById('weapon-img');
+
+        if (fireBtn && weaponImg) {
+            fireBtn.addEventListener('click', () => {
+                // 添加后坐力 CSS 类
+                weaponImg.classList.add('weapon-recoil');
+                
+                // 100 毫秒后恢复原状，形成震动打击感
+                setTimeout(() => {
+                    weaponImg.classList.remove('weapon-recoil');
+                }, 100);
+            });
+        }
     </script>
+</body>
+</html>
 </body>
 </html>
